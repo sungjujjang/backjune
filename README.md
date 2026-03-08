@@ -1,2 +1,2 @@
 # backjune
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+boj 문제 풀이 저장소
