@@ -1,0 +1,43 @@
+section .data
+    input: db "%d", 0
+    output: db "%d * %d = %d", 10, 0
+
+section .bss
+    n: resd 1
+
+section .text
+    global main
+    extern scanf
+    extern printf
+
+main:
+    push ebx
+    push ecx
+
+    push n
+    push input ; 4
+    call scanf ; 16
+    add esp, 8 ; stack clear
+    
+    mov ecx, 1
+    _loop:
+        push ecx ; printf에서 ecx 건드리는 경우 있다케서 스택에다 저장해뿌림
+        
+        mov eax, [n]
+        mul ecx
+        push eax
+        push ecx
+        push dword [n]
+        push output
+        call printf
+        add esp, 16
+        
+        pop ecx
+        inc ecx
+        cmp ecx, 10
+        jne _loop
+
+        pop ecx
+        pop ebx
+        mov eax, 0
+        ret
