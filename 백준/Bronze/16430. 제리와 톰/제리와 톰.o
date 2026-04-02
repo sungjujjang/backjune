@@ -1,0 +1,37 @@
+section .data
+    input: db "%d %d", 0
+    output: db "%d %d", 10, 0
+
+section .bss
+    n: resd 1
+    a: resd 1
+    b: resd 1
+
+section .text
+    global main
+    extern scanf
+    extern printf
+
+main:
+    push ebx
+    push ecx
+	
+	push b
+    push a
+    push input
+    call scanf
+    add esp, 12
+    
+    mov ebx, [b]
+    sub ebx, [a]
+    
+    push dword [b]
+    push ebx
+    push output
+    call printf
+    add esp, 12
+    
+    pop ecx
+    pop ebx
+    mov eax, 0
+    ret
