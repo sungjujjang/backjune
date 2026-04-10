@@ -1,0 +1,44 @@
+section .data
+    input: db "%d", 0
+    eng: db "YONSEI", 10, 0
+    slo: db "Leading the Way to the Future", 10, 0
+    
+section .bss
+    n: resd 1
+
+section .text
+    global main
+    extern scanf
+    extern printf
+
+main:
+    push ebx
+    push ecx
+    push edi
+	
+    push n
+    push input
+    call scanf
+    add esp, 8
+    
+    mov edi, 0
+    cmp edi, [n]
+    je _equal
+    
+    _notequal:
+        push slo
+        call printf
+        add esp, 4
+        jmp _end
+    
+    _equal:
+        push eng
+        call printf
+        add esp, 4
+    
+    _end:
+        pop edi
+        pop ecx
+        pop ebx
+        mov eax, 0
+        ret
